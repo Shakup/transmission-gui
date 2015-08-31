@@ -1,0 +1,23 @@
+<div class="sidebar col-4">
+
+	<form id="form-search">
+		<input type="text" id="input-search" placeholder="Search torrent">
+		<button type="submit" id="submit-search"><i class="fa fa-search"></i></button>
+	</form>
+
+	<div id="dropzone">
+		<h2><i class="fa fa-cloud-upload"></i>Drop torrent or click here</h2>
+		<label><input type="file" id="torrent-input" required accept=".torrent"></label>
+	</div>
+
+	<div class="bandwidth indicator">
+		<h2>Download Bandwidth</h2>
+		<canvas id="bandwidth-download-chart" class="bandwidth-chart" width="100%" height="120"></canvas>
+	</div>
+
+	<div class="bandwidth indicator">
+		<h2>Upload Bandwidth</h2>
+		<canvas id="bandwidth-upload-chart" class="bandwidth-chart" width="100%" height="120"></canvas>
+	</div>
+
+</div>

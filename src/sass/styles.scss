@@ -1,0 +1,332 @@
+body{
+	font-family: $font-regular;
+	font-size: 16px;
+	line-height: 1.5em; // 24px;
+	background-color: $color-black-primary;
+	color: $color-ivory-primary;
+}
+
+#torrents-loader{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -50px 0 0 -50px;
+}
+
+#cover{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity 500ms ease-in-out;
+	@extend %cover;
+
+	&:after{
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		top: 0;
+		background-color: rgba(black, .4);
+	}
+}
+
+#btn-toggle-menu{
+	height: 40px;
+	width: 40px;
+	color: white;
+	font-size: 26px;
+	margin-right: 10px;
+}
+
+.main-header{
+	margin: 20px 0 40px;
+}
+
+h1{
+	font-size: 3em;
+	font-weight: lighter;
+	font-family: $font-light;
+	line-height: 1;
+	flex: 1;
+}
+
+.main-wrapper{
+	position: relative;
+	padding: 20px 20px 0;
+	z-index: 2;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.main-content{
+	flex: 1;
+	//flex-direction: column;
+}
+
+.sidebar{
+	padding-left: 20px;
+}
+
+#form-search{
+	position: relative;
+
+	input{
+		height: 42px;
+		padding: 0 52px 0 10px;
+		background-color: rgba(white, .85);
+		width: 100%;
+		transition: background 350ms ease;
+		border: none;
+
+		&:focus{
+			background-color: white;
+		}
+	}
+
+	button{
+		position: absolute;
+		height: 42px;
+		right: 0;
+		top: 0;
+		border: none;
+		background-color: transparent;
+		outline: none;
+		width: 42px;
+	}
+}
+
+#menu-wrapper{
+	position: fixed;
+	display: none;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+	z-index: 3;
+	transition: background 350ms ease;
+
+	&.active{
+		background-color: rgba(black, .6);
+
+		.primary-menu{
+			transform: translateX(0%);
+		}
+	}
+}
+
+.primary-menu{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 250px;
+	background-color: $color-ivory-primary;
+	transform: translateX(-100%);
+	transition: all 350ms ease;
+}
+
+#torrents-downloads{
+	overflow-y: auto;
+	flex: 1;
+	background-color: rgba(white, .3);
+}
+
+.torrent-download{
+	position: relative;
+	background-color: $color-ivory-primary;
+	padding: 10px;
+	margin: 8px;
+	box-shadow: 0 1px 1px rgba(black, .4);
+
+	&.movie{
+		padding: 10px 10px 10px 95px;
+		
+		.torrent-cover{
+			display: block;
+		}		
+	}
+}
+
+.torrent-cover{
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 85px;
+	bottom: 0;
+	background-color: $color-ivory-secondary;
+	@extend %cover;
+}
+
+.torrent-header{
+	span{
+		flex: 1;
+	}
+
+	button{
+		height: 20px;
+		width: 20px;
+		color: $color-black-secondary;
+		border: 1px solid $color-ivory-secondary;
+		border-radius: 2px;
+	}
+}
+
+.torrent-metas{
+	margin-top: 5px;
+
+	div{
+		margin-left: 16px;
+		font-size: .8em;
+		color: $color-black-secondary;
+
+		&:first-child{
+			margin-left: 0;
+		}
+
+		i{
+			margin-right: 6px;
+			color: $color-grey-secondary;
+		}
+	}
+}
+
+.torrent-ctrl{
+	font-size: 10px;
+
+	&:hover{
+		border-color: $color-blue-primary;
+		background-color: $color-blue-primary;
+		color: white;
+	}
+
+	&:not(.active) .fa-play{
+		display: none;
+	}
+
+	&.active{
+		.fa-pause{
+			display: none;
+		}
+	}
+}
+
+.torrent-delete{
+	font-size: 12px;
+	margin-left: 5px;
+
+	i{
+		transform: translateY(-1px);
+	}
+
+	&:hover{
+		border-color: $color-red-primary;
+		background-color: $color-red-primary;
+		color: white;
+	}
+}
+
+.torrent-name{
+	display: block;
+	@extend %truncate;
+	font-family: $font-bold;
+	color: $color-black-secondary;
+}
+
+.torrent-progress{
+	margin-top: 10px;
+	background-color: rgba($color-black-secondary, .8);
+
+	div{
+		height: 10px;
+		background-color: $color-blue-primary;
+
+		&.complete{
+			background-color: $color-green-primary;
+		}
+
+		&.error{
+			background-color: $color-red-primary;
+		}
+	}
+}
+
+.indicator{
+	text-align: center;
+
+	h2{
+		font-family: $font-bold;
+		text-transform: uppercase;
+		font-size: .8em;
+		margin-bottom: 10px;
+		color: $color-ivory-secondary;
+	}
+
+	span{
+		font-size: 2em;
+	}
+
+	em{
+		font-size: .5em;
+	}
+}
+
+.bandwidth-chart{
+	width: 100%;
+	height: 120px;
+}
+
+#dropzone{
+	height: 120px;
+	background-color: rgba($color-midnight-primary, .9);
+	margin: 20px 0;
+	position: relative;
+
+	&:before{
+		content: '';
+		position: absolute;
+		left: 5px;
+		top: 5px;
+		right: 5px;
+		bottom: 5px;
+		border: 1px dashed $color-grey-secondary;
+	}
+
+	h2{
+		position: absolute;
+		left: 0;
+		right: 0;
+		text-align: center;
+		top: 50%;
+		color: $color-ivory-secondary;
+		transform: translateY(-50%);
+		text-transform: uppercase;
+		font-size: .8em;
+
+		i{
+			display: block;
+			font-size: 3em;
+			margin: 0 auto 5px;
+		}
+	}
+
+	label{
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		cursor: pointer;
+
+		input{
+			opacity: 0;
+			transform: translateY(-100%);
+		}
+	}
+}

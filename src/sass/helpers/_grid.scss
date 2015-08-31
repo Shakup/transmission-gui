@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Simple Grid System
+   ========================================================================== */
+
+@mixin simple-grid($columns: 12, $gutter-h: 20px, $gutter-v: 20px){
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+
+	> *{
+		background-clip: padding-box;
+		width: (1 / $columns) * 100%;
+
+		@if $gutter-h > 0{
+			border-left: $gutter-h+px solid transparent;
+
+			&:nth-child(#{$columns}n+1){
+				border-left: none;
+			}
+		}
+		
+		@if $gutter-v > 0{
+			border-top: $gutter-h+px solid transparent;
+
+			&:nth-child(-n+#{$columns}){
+				border-top: none;
+			}
+		}
+
+	}
+}
+
+/* ==========================================================================
+   Advanced Grid System
+   ========================================================================== */
+
+$grid-columns: 12;
+
+.row{
+	display: flex;
+	flex-direction: row;
+
+	&.wrap{
+		flex-wrap: wrap;
+	}
+
+	&.no-wrap{
+		flex-wrap: nowrap;
+	}
+
+	&.justify-start{
+		justify-content: flex-start;
+	}
+
+	&.justify-end{
+		justify-content: flex-end;
+	}
+
+	&.justify-center{
+		justify-content: center;
+	}
+
+	&.space-around{
+		justify-content: space-around;
+	}
+
+	&.space-between{
+		justify-content: space-between;
+	}
+
+	&.align-start{
+		align-items: flex-start;
+	}
+
+	&.align-start{
+		align-items: flex-start;
+	}
+
+	&.align-end{
+		align-items: flex-end;
+	}
+
+	&.align-center{
+		align-items: center;
+	}
+
+	&.align-stretch{
+		align-items: stretch;
+	}
+}
+
+[class^="col-"]{
+	&.align-start{
+		align-self: flex-start;
+	}
+
+	&.align-center{
+		align-self: flex-center;
+	}
+
+	&.align-end{
+		align-self: flex-end;
+	}
+}
+
+@mixin col-hide{
+	display: none;
+}
+
+@mixin col-show{
+	display: flex;
+}
+
+@mixin gen-columns($size: ''){
+	@for $i from 1 through $grid-columns{
+		
+		@if $size == '' {
+			.col-#{$i}{
+				width: $i / $grid-columns * 100%;			
+			}
+		}
+		@else{
+			.col-#{$size}-#{$i}{
+				width: $i / $grid-columns * 100%;
+			}
+		}
+	}
+}
+
+$breakpoints : $device-extra-small $device-small $device-medium $device-large;
+$device-prefixes : xs s m l;
+
+@for $i from 1 through length($device-prefixes){
+	$device-prefix : nth($device-prefixes, $i);
+	$breakpoint    : nth($breakpoints, $i);
+
+	@media only screen and (min-width : $breakpoint + 1){
+		.col-#{$device-prefix}-hide{ @include col-hide; }
+		.col-#{$device-prefix}-show{ @include col-show; }
+		@include gen-columns($device-prefix);
+	}
+
+}
+
+@include gen-columns();

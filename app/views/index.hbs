@@ -1,0 +1,59 @@
+<div id="cover" data-cover="{{cover}}" data-covers="{{covers}}"></div>
+
+<div class="main-wrapper row">
+
+	<header class="main-header row align-center">
+		<button type="button" id="btn-toggle-menu"><i class="fa fa-bars"></i></button>
+		
+		<h1>Hello {{username}}</h1>
+
+		<div class="row col-4">
+			<div class="col-4 indicator">
+				<h2>Download</h2>
+				<span id="download-speed"></span>
+			</div>
+
+			<div class="col-4 indicator">
+				<h2>Upload</h2>
+				<span id="upload-speed"></span>
+			</div>
+
+			<div class="col-4 indicator">
+				<h2>Free Space</h2>
+				<span id="free-space"></span>
+			</div>
+		</div>
+	</header>
+
+	<div class="main-content row">
+
+		<div id="torrents-downloads" class="col-8">
+			<img src="/assets/img/loader_circle.svg" height="100" width="100" id="torrents-loader">
+		</div>
+		
+		{{>sidebar}}
+
+	</div>
+
+</div>
+
+<template id="torrent-template">
+	<div class="torrent-download" id="torrent-\{{id}}">
+		<figure class="torrent-cover"></figure>
+		<header class="torrent-header row align-center">
+			<span class="torrent-name">\{{name}}</span>
+			<button type="button" class="torrent-ctrl \{{active}}" data-id="\{{id}}"><i class="fa fa-pause"></i><i class="fa fa-play"></i></button>
+			<button type="button" class="torrent-delete" data-id="\{{id}}"><i class="fa fa-times"></i></button>
+		</header>
+		<div class="torrent-progress"><div style="width:\{{progress}}%" class="\{{status}}"></div></div>
+		<div class="torrent-metas row align-center">
+			<div class="torrent-meta-size"><i class="fa fa-archive"></i><span>\{{info}}</span></div>
+			<div class="torrent-meta-download"><i class="fa fa-arrow-down"></i><span>\{{downloaded}}</span></div>
+			<div class="torrent-meta-upload"><i class="fa fa-arrow-up"></i><span>\{{uploaded}}</span></div>
+			<div class="torrent-meta-files"><i class="fa fa-files-o"></i><span>\{{files}}</span></div>
+			<div class="torrent-meta-ratio"><i class="fa fa-balance-scale"></i><span>\{{ratio}}</span></div>
+			<div class="torrent-meta-peers"><i class="fa fa-globe"></i><span>\{{peers}}</span></div>
+			<div class="torrent-meta-time"><i class="fa fa-clock-o"></i><span>\{{remain}}</span></div>
+		</div>
+	</div>
+</template>
